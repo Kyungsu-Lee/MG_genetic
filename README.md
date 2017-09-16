@@ -13,8 +13,8 @@ src -- mg --- jenetic
 
 <b> Ant </b>
 
-<\t>	1. ant build
-<\t>	2. ant clean
-<\t>	3. ant doc
+	1. ant build
+	2. ant clean
+	3. ant doc
 
 </pre>
