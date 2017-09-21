@@ -2,10 +2,10 @@
 
 <project default="build" basedir=".">
 
-<property name="src" value="src"/>
-<property name="bin" value="bin"/>
-<property name="lib" value="lib"/>
-<property name="doc" value="doc"/>
+<property name="src" value="./src"/>
+<property name="bin" value="./bin"/>
+<property name="lib" value="./lib"/>
+<property name="doc" value="./doc"/>
 
 <target name="init">
 	<delete dir="${bin}"/>
