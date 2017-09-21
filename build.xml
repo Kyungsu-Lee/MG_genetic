@@ -19,7 +19,6 @@
  </target>
 
 
-
 <target name="doc" depends="build" description="generate documentation">
 	<mkdir dir="${doc}"/>
 	<javadoc destdir="${doc}" packagenames="*.*" author="false" private="true" version="true" windowtitle="Simple Documentation">
