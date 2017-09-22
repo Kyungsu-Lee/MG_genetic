@@ -1,6 +1,7 @@
 package mg.algorithm;
 
 import java.util.*;
+import mg.machine.Machine;
 
 public class Table
 {
@@ -12,10 +13,11 @@ public class Table
 	private ArrayList<String> depthes = new ArrayList<String>();
 	private ArrayList<String> g_index = new ArrayList<String>();
 
-	private ArrayList<String>[] arrays = new ArrayList<String>[7];
+	private ArrayList<String>[] arrays;
 
 	public Table()
 	{
+			arrays = new ArrayList<String>[7];
 			arrays[0] = machine_name;
 			arrays[1] = l_margins;
 			arrays[2] = r_margins;
@@ -65,13 +67,13 @@ public class Table
 			if(attribute.equals("group_index"))
 				return Integer.parseInt(g_index.get(index));
 
-			return -1;
+			return -1.0;
 
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 	
-			return -1;
+			return -1.0;
 		}
 	}	
 
@@ -99,13 +101,13 @@ public class Table
 			if(attribute.equals("group_index"))
 				return Integer.parseInt(g_index.get(index));
 
-			return -1;
+			return -1.0;
 
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 	
-			return -1;
+			return -1.0;
 		}
 	}	
 
@@ -117,8 +119,10 @@ public class Table
 			this.getValue(index, "b_margin"),
 			this.getValue(index, "depth"),
 			this.getValue(index, "width"),
-			this.getValue(index, "group_index"),
+			this.getValue(index, "group_index")
 		);
+
+		return m;
 	}
 
 	public ArrayList<Machine> getAllMachines()
