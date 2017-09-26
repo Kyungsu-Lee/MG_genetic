@@ -8,6 +8,7 @@ public class CustomFrame extends JFrame
 	public CustomFrame()
 	{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBackground(Color.WHITE);
 	}	
 
 

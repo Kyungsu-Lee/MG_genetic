@@ -2,4 +2,4 @@
 
 ant
 cd bin
-java mg/Main
+java mg/main/Main ../data/data.csv ../data/sequence.csv
