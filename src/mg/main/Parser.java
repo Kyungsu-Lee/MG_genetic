@@ -5,6 +5,8 @@ import mg.machine.Machine;
 
 public class Parser
 {
+	static int m_index = 0;
+
 	public static ArrayList<Machine> makeMachine(String str)
 	{
 		ArrayList<Machine> array = new ArrayList<Machine>();
@@ -16,11 +18,11 @@ public class Parser
 			try
 			{
 				double[] attr = toAttributes(sub);
-				array.add(new Machine(attr[0], attr[1], attr[2], attr[3], attr[4], (int)attr[5]));
+				array.add(new Machine(attr[0], attr[1], attr[2], attr[3], attr[4], (int)attr[5], "M"+ Integer.toString(++m_index)));
 			}
 			catch(Exception e)
 			{
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 

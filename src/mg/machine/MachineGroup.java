@@ -24,4 +24,21 @@ public class MachineGroup
 		this.add(machine);
 		machine.setGroupIndex(this.groupIndex);
 	}
+
+	public ArrayList<Machine> get() { return this.array; }
+
+	@Override
+	public String toString()
+	{
+		StringBuilder str = new StringBuilder("Group " + groupIndex);
+		str.append("\n{");
+		
+		for(Machine m : array)
+			str.append("\n\t"+m);
+		
+		str.append("\n}");
+		str.append("\n");
+
+		return str.toString();
+	}	
 }

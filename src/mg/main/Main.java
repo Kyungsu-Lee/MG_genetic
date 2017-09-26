@@ -12,7 +12,6 @@ class Main
 {
 	public static void main(String[] args)
 	{
-/*
 		String str = "";
 
 
@@ -26,13 +25,40 @@ class Main
 		{
 			System.out.println("File Name Error");
 		}
-*/
-		RectDrawer rd = new RectDrawer()
-					.addRect(new Rect(100, 100, 200, 200).setInnerColor(Color.RED))
-					.addRect(new Rect(150, 150, 500, 500).setInnerColor(Color.BLUE))
-					.build();
 
-		new CustomFrame().size(500, 600).adds(rd).start();
+		GroupList gl = new GroupList(Parser.makeMachine(str), ReadFile.getSequence());
+
+		ArrayList<Section> sections = new ArrayList<Section>();
+	
+		int index = 0;
+
+		try{
+			Section current = new Section(index, gl.get().get(0).getGroupIndex());
+			sections.add(current);
+
+			for(Machine m : gl.get().get(0).get())
+			{
+				if(current.addMachine(m))
+				{
+				}
+				else
+				{
+					current = new Section(++index, gl.get().get(0).getGroupIndex());
+					sections.add(current);
+					current.addMachine(m);
+				}
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		for(Section s : sections)
+		{
+			System.out.println("l : " + s.getLSize() + "\tr : " + s.getRSize());
+			System.out.println(s);
+			System.out.println("\n\n====================================");
+		}
 	}
 }
 
