@@ -2,8 +2,11 @@ package mg.machine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.*;
+import java.awt.*;
 
 import mg.gui.MyPoint;
+import mg.gui.Rect;
 
 public class Section
 {
@@ -14,6 +17,9 @@ public class Section
 	private ArrayList<Machine> r_machines = new ArrayList<Machine>();
 	private HashMap<String, Double> leftMachinePoint = new HashMap<String, Double>();
 	private HashMap<String, Double> rightMachinePoint = new HashMap<String, Double>();
+	
+	private boolean upper = false;
+	private double global_location = 0;
 
 	private static final double WIDTH = 40;
 	private double depth = 0;
@@ -27,6 +33,9 @@ public class Section
 	private double r_before_machine = 0;
 	private double r_start_point = 0;
 
+	private MyPoint LU;
+	private MyPoint RD;
+
 
 	public Section(final int index, final int groupIndex)
 	{
@@ -37,6 +46,17 @@ public class Section
 	public double getDepth() { return this.depth; }
 	public int getLSize() { return this.l_machines.size(); }
 	public int getRSize() { return this.r_machines.size(); }
+	public int getGroupIndex() { return this.groupIndex; }
+	public int getIndex() { return this.index; }
+
+	public void setGlobalLocation(double x, boolean upper)
+	{
+		this.upper = upper;
+		this.global_location = x;
+	}
+
+	public String getGlobalFlag() { return upper ? "UP" : "DOWN"; }
+	public double getGlobalLocation() { return this.global_location; }
 
 	public boolean addMachine(Machine machine) throws Exception
 	{
@@ -44,7 +64,6 @@ public class Section
 
 		if(!l_full)
 		{
-		System.out.println("insert " + machine + "to left");
 			if(l_start_point - l_before_machine >= machine.get_l_margin())
 			{
 				double tmp_start_point = l_start_point;
@@ -134,8 +153,14 @@ public class Section
 	
 	public Section build()
 	{
-		double l_max = l_machines.get(0).get_b_margin() + l_machines.get(0).get_depth();
-		double r_max = r_machines.get(0).get_b_margin();
+		double l_max = 0;
+		double r_max = 0;
+
+		if(l_machines.size() > 0)
+		l_max = l_machines.get(0).get_b_margin() + l_machines.get(0).get_depth();
+		
+		if(r_machines.size() > 0)
+		r_max = r_machines.get(0).get_b_margin();
 
 		for(Machine m : l_machines)
 			if(l_max < m.get_b_margin() + m.get_depth())
@@ -148,6 +173,29 @@ public class Section
 		this.depth = l_max + WIDTH_BAY + r_max;
 		
 		return this;
+	}
+
+	public void fixGlobalLocation(MyPoint LU, MyPoint RD)
+	{
+		this.LU = LU;
+		this.RD = RD;
+
+		System.out.println(this.index + " " + new Rect(LU, RD));
+	}
+
+	public Rect toRect()
+	{
+		return new Rect(this.LU, this.RD);
+	}
+
+	public Rect toRect(Color borderColor)
+	{
+		return this.toRect().setBorderColor(borderColor);
+	}
+
+	public Rect toRect(Color borderColor, Color innerColor)
+	{
+		return this.toRect(borderColor).setInnerColor(innerColor);
 	}
 
 	@Override
@@ -169,11 +217,4 @@ public class Section
 
 		return sb.toString();
 	}
-
-	private class PivotPoint extends MyPoint
-	{
-		public PivotPoint(double x, double y) { super(x,y); }
-		public PivotPoint(int x, int y) { super(x, y); }
-	}
-
 }

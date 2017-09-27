@@ -25,7 +25,7 @@ public class MachineGroup
 		machine.setGroupIndex(this.groupIndex);
 	}
 
-	public ArrayList<Machine> get() { return this.array; }
+	public ArrayList<Machine> getAllMachines() { return this.array; }
 
 	@Override
 	public String toString()

@@ -24,7 +24,7 @@ public class GroupList
 			groups.get(parse(m.get_index())).add(m);
 	}
 
-	public ArrayList<MachineGroup> get() { return this.groups; }
+	public ArrayList<MachineGroup> getAllGroups() { return this.groups; }
 
 	@Override
 	public String toString()

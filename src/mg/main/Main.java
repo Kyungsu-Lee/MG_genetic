@@ -13,7 +13,7 @@ class Main
 	public static void main(String[] args)
 	{
 		String str = "";
-
+		RectDrawer rd = new RectDrawer();
 
 		//readFile
 		try{
@@ -28,37 +28,29 @@ class Main
 
 		GroupList gl = new GroupList(Parser.makeMachine(str), ReadFile.getSequence());
 
-		ArrayList<Section> sections = new ArrayList<Section>();
-	
-		int index = 0;
+		ArrayList<Section> sections = SectionDivider.make(gl);
+		
+		Factory factory = new Factory();
 
 		try{
-			Section current = new Section(index, gl.get().get(0).getGroupIndex());
-			sections.add(current);
-
-			for(Machine m : gl.get().get(0).get())
-			{
-				if(current.addMachine(m))
-				{
-				}
-				else
-				{
-					current = new Section(++index, gl.get().get(0).getGroupIndex());
-					sections.add(current);
-					current.addMachine(m);
-				}
-			}
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
 		for(Section s : sections)
 		{
-			System.out.println("l : " + s.getLSize() + "\tr : " + s.getRSize());
-			System.out.println(s);
-			System.out.println("\n\n====================================");
+			factory.addSection(s);
+			System.out.println("Section " + s.getIndex() + " inserted");
+			}
+		}	
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("fatal error : factory is full");
 		}
+		factory.build();
+
+		for(Section s : factory.getAllSections())
+			rd.addRect(s.toRect(Color.WHITE, RandomColor.get()));
+
+		new CustomFrame().size(1000, 1000).adds(rd).start();
+		
 	}
 }
 

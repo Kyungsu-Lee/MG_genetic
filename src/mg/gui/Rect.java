@@ -67,4 +67,10 @@ public class Rect
 
 		return this.height;
 	}
+
+	@Override
+	public String toString()
+	{
+		return LU + " ~ " + RD;
+	}
 }
