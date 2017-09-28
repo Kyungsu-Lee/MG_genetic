@@ -1,5 +1,10 @@
 package mg.machine;
 
+import javax.swing.*;
+import java.awt.*;
+
+import mg.gui.*;
+
 public class Machine
 {
 	protected double l_margin;
@@ -12,6 +17,9 @@ public class Machine
 	protected int group_index;
 
 	protected String name;
+
+	protected MyPoint LU;
+	protected MyPoint RD;
 
 	public double get_l_margin() { return this.l_margin; }
 	public double get_r_margin() { return this.r_margin; }
@@ -53,6 +61,29 @@ public class Machine
 		this.b_margin = b;
 		this.width = w;
 		this.depth = d;
+	}
+
+	public void setGlobalLocation(MyPoint LU, MyPoint RD)
+	{
+		this.LU = LU;
+		this.RD = RD;
+
+		System.out.println(this.get_name() + " : " + LU + "~" + RD);
+	}
+
+	public Rect toRect()
+	{
+		return new Rect(LU, RD);
+	}
+
+	public Rect toRect(Color borderColor)
+	{
+		return new Rect(LU, RD).setBorderColor(borderColor);
+	}
+
+	public Rect toRect(Color borderColor, Color innerColor)
+	{
+		return new Rect(LU, RD).setBorderColor(borderColor).setInnerColor(innerColor);
 	}
 
 	@Override

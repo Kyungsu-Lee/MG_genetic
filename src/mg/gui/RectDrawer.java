@@ -8,6 +8,8 @@ import javax.swing.*;
 
 public class RectDrawer  extends JPanel
 {	
+	private double scale = 5;
+
 	private ArrayList<Rect> rects = new ArrayList<Rect>();
 
 	public RectDrawer()
@@ -51,17 +53,17 @@ public class RectDrawer  extends JPanel
 		{
 			g.setColor(r.getInnerColor());
 			g.fillRect(
-				(int)r.getLU().getX(), 
-				(int)r.getLU().getY(), 
-				(int)r.getWidth(), 
-				(int)r.getHeight()
+				(int)(r.getLU().getX() * scale), 
+				(int)(r.getLU().getY() * scale), 
+				(int)(r.getWidth() * scale), 
+				(int)(r.getHeight() * scale)
 			);
 			g.setColor(r.getBorderColor());
 			g.drawRect(
-				(int)r.getLU().getX(), 
-				(int)r.getLU().getY(), 
-				(int)r.getWidth(), 
-				(int)r.getHeight()
+				(int)(r.getLU().getX() * scale), 
+				(int)(r.getLU().getY() * scale), 
+				(int)(r.getWidth() * scale), 
+				(int)(r.getHeight() * scale)
 			);
 		}
 	}

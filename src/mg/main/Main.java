@@ -46,10 +46,18 @@ class Main
 		}
 		factory.build();
 
-		for(Section s : factory.getAllSections())
-			rd.addRect(s.toRect(Color.WHITE, RandomColor.get()));
+		Color[] color = new Color[9];
+		for(int i=0; i < color.length; i++)
+			color[i] = RandomColor.get();
 
-		new CustomFrame().size(1000, 1000).adds(rd).start();
+		for(Section s : factory.getAllSections())
+		{
+			rd.addRect(s.toRect(Color.BLACK, color[s.getGroupIndex()]));
+
+			for(Machine m : s.getAllMachines())
+				rd.addRect(m.toRect(Color.BLACK, color[m.get_index()]));
+		}
+		new CustomFrame().size(2000, 1500).adds(rd).start();
 		
 	}
 }

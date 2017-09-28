@@ -36,6 +36,8 @@ public class Section
 	private MyPoint LU;
 	private MyPoint RD;
 
+	private double l_max;
+	private double r_max;
 
 	public Section(final int index, final int groupIndex)
 	{
@@ -171,6 +173,8 @@ public class Section
 				r_max = m.get_b_margin() + m.get_depth();
 
 		this.depth = l_max + WIDTH_BAY + r_max;
+		this.l_max = l_max;
+		this.r_max = r_max;
 		
 		return this;
 	}
@@ -180,7 +184,24 @@ public class Section
 		this.LU = LU;
 		this.RD = RD;
 
-		System.out.println(this.index + " " + new Rect(LU, RD));
+		if(this.depth == 0)
+			this.build();
+
+		for(Machine m : l_machines)
+		{
+			MyPoint mLU = new MyPoint(LU.getX() + m.get_b_margin(), RD.getY() - leftMachinePoint.get(m.get_name()) - m.get_width());
+			MyPoint mRD = new MyPoint(LU.getX() + m.get_b_margin() + m.get_depth(), RD.getY() - leftMachinePoint.get(m.get_name()));
+		
+			m.setGlobalLocation(mLU, mRD);
+		}
+
+		for(Machine m : r_machines)
+		{
+			MyPoint mLU = new MyPoint(LU.getX() + this.l_max + WIDTH_BAY, RD.getY() - rightMachinePoint.get(m.get_name()) - m.get_width());
+			MyPoint mRD = new MyPoint(LU.getX() + this.l_max + WIDTH_BAY + m.get_depth(), RD.getY() - rightMachinePoint.get(m.get_name()));
+
+			m.setGlobalLocation(mLU, mRD);
+		}
 	}
 
 	public Rect toRect()
@@ -216,5 +237,17 @@ public class Section
 		sb.append("\n}");
 
 		return sb.toString();
+	}
+
+	public ArrayList<Machine> getAllMachines()
+	{
+		ArrayList<Machine> arr = new ArrayList<Machine>();
+
+		for(Machine m : l_machines)
+			arr.add(m);
+		for(Machine m : r_machines)
+			arr.add(m);
+		
+		return arr;		
 	}
 }
