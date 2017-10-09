@@ -15,6 +15,9 @@ class Main
 		String str = "";
 		RectDrawer rd = new RectDrawer();
 
+		Color m_r = new Color(255, 0, 120, 150);
+		Color m_l = new Color(150, 255, 150, 150);
+
 		//readFile
 		try{
 
@@ -53,6 +56,16 @@ class Main
 		for(Section s : factory.getAllSections())
 		{
 			rd.addRect(s.toRect(Color.BLACK, color[s.getGroupIndex()]));
+
+			int i = 0;
+	
+			for(Machine m : s.getAllMachines()){                            //
+				if (i%2==0)                                                     //
+					rd.addRect(m.toMRect(Color.BLACK, m_r));        //
+				else
+					rd.addRect(m.toMRect(Color.BLACK, m_l));        //
+				i++;
+			}
 
 			for(Machine m : s.getAllMachines())
 				rd.addRect(m.toRect(Color.BLACK, color[m.get_index()]));

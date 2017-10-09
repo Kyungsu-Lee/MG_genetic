@@ -5,7 +5,7 @@ import mg.gui.MyPoint;
 
 public class Factory
 {
-	public static final double WIDTH = 400;
+	public static final double WIDTH = 200;
 	public static final double HEIGHT = 82;
 	public static final double WIDTH_BAY = 2;
 

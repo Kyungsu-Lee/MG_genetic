@@ -21,6 +21,9 @@ public class Machine
 	protected MyPoint LU;
 	protected MyPoint RD;
 
+	protected MyPoint MLU;
+	protected MyPoint MRD;
+
 	public double get_l_margin() { return this.l_margin; }
 	public double get_r_margin() { return this.r_margin; }
 	public double get_b_margin() { return this.b_margin; }
@@ -63,12 +66,15 @@ public class Machine
 		this.depth = d;
 	}
 
-	public void setGlobalLocation(MyPoint LU, MyPoint RD)
+	public void setGlobalLocation(MyPoint LU, MyPoint RD, MyPoint MLU, MyPoint MRD)
 	{
 		this.LU = LU;
 		this.RD = RD;
 
-		System.out.println(this.get_name() + " : " + LU + "~" + RD);
+		this.MLU = MLU;
+		this.MRD = MRD;
+
+		System.out.println(this.get_name() + " : " + LU + "~" + RD + " : " + MLU + "~" + MRD);
 	}
 
 	public Rect toRect()
@@ -84,6 +90,21 @@ public class Machine
 	public Rect toRect(Color borderColor, Color innerColor)
 	{
 		return new Rect(LU, RD).setBorderColor(borderColor).setInnerColor(innerColor);
+	}
+
+	public Rect toMRect()
+	{
+		return new Rect(MLU, MRD);
+	}
+
+	public Rect toMRect(Color borderColor)
+	{
+		return new Rect(MLU, MRD).setBorderColor(borderColor);
+	}
+
+	public Rect toMRect(Color borderColor, Color innerColor)
+	{
+		return new Rect(MLU, MRD).setBorderColor(borderColor).setInnerColor(innerColor);
 	}
 
 	@Override

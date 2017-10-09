@@ -191,8 +191,11 @@ public class Section
 		{
 			MyPoint mLU = new MyPoint(LU.getX() + m.get_b_margin(), RD.getY() - leftMachinePoint.get(m.get_name()) - m.get_width());
 			MyPoint mRD = new MyPoint(LU.getX() + m.get_b_margin() + m.get_depth(), RD.getY() - leftMachinePoint.get(m.get_name()));
-		
-			m.setGlobalLocation(mLU, mRD);
+
+			MyPoint MLU = new MyPoint(LU.getX(), RD.getY() - leftMachinePoint.get(m.get_name()) - m.get_width() - m.get_l_margin());
+			MyPoint MRD = new MyPoint(LU.getX() + m.get_b_margin() + m.get_depth(), RD.getY() - leftMachinePoint.get(m.get_name()) + m.get_r_margin());
+
+			m.setGlobalLocation(mLU, mRD, MLU, MRD);
 		}
 
 		for(Machine m : r_machines)
@@ -200,7 +203,10 @@ public class Section
 			MyPoint mLU = new MyPoint(LU.getX() + this.l_max + WIDTH_BAY, RD.getY() - rightMachinePoint.get(m.get_name()) - m.get_width());
 			MyPoint mRD = new MyPoint(LU.getX() + this.l_max + WIDTH_BAY + m.get_depth(), RD.getY() - rightMachinePoint.get(m.get_name()));
 
-			m.setGlobalLocation(mLU, mRD);
+			MyPoint MLU = new MyPoint(LU.getX() + this.l_max + WIDTH_BAY, RD.getY() - rightMachinePoint.get(m.get_name()) - m.get_width() - m.get_l_margin());
+			MyPoint MRD = new MyPoint(LU.getX() + this.l_max + WIDTH_BAY + m.get_b_margin() + m.get_depth(), RD.getY() - rightMachinePoint.get(m.get_name()) + m.get_r_margin());
+
+			m.setGlobalLocation(mLU, mRD, MLU, MRD);
 		}
 	}
 
