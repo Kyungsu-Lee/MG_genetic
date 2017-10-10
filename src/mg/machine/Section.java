@@ -57,6 +57,8 @@ public class Section
 		this.global_location = x;
 	}
 
+    public double getBayStart() { return ( ( this.LU.getX() + this.RD.getX() - WIDTH_BAY )/2.00 ) ; }
+
 	public String getGlobalFlag() { return upper ? "UP" : "DOWN"; }
 	public double getGlobalLocation() { return this.global_location; }
 

@@ -17,7 +17,7 @@ public class Factory
 	private double upper_b = 0;
 	private double down_b = 0;
 
-
+    public double getWidth() { return WIDTH ; }
 
 	public void addSection(Section s) throws Exception
 	{
